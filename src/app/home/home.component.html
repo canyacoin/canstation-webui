@@ -1,5 +1,5 @@
-
-<app-header></app-header>
+<app-header>
+</app-header>
 
 <!-- Main container -->
 <main class="main-content">
@@ -9,36 +9,49 @@
   | Main section
   |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
   !-->
-  <section class="section bg-gray py-30" id="section-main">
+  <section class="section" id="section-main">
 
     <div class="container">
+      <div class="">
+        <app-gas-input (gasChange)="setGasInGwei($event)"></app-gas-input>
+      </div>
+      
+      <hr/>
 
-      <app-gas-input></app-gas-input>
-     
+      <div class="row">
+        <div class="col" *ngFor="let estimate of estimates">
+          <app-gas-costs [costPerGwei]="estimate.costPerGwei" [widgetLabel]="estimate.name" [gasInGwei]="getGasInGwei()"></app-gas-costs>
+        </div>
+      </div>
+
+      <div class="note text-center">
+          <small>* Data provided by ethgasstation.info based on average 100 transactions from the last block mined by the network.</small>
+      </div>
+      
     </div>
-    
+
   </section>
-  
+
   <!--
   |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
   | Subscribe
   |‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒‒
   !-->
   <section class="section shadow-1 mt-60" style="background-image: linear-gradient(122deg, #3cf, #01fecd);">
-      <div class="container text-center">
-  
-        <div class="row mt-20 align-items-center">
-            <div class="col-12 text-center">
-              <img src="assets/img/telegram.png" alt="CanYa - telegram" width="auto" height="100px">
-              <h4 class="text-white pt-25">Got another question? Ask our active community on Telegram.</h4>
-              <br>
-              <a href="https://t.me/CanYaCommunity" target="_blank" class="btn btn-lg btn-primary shadow-3">
-                Join us on Telegram</a>
-            </div>
-          </div>
-  
+    <div class="container text-center">
+
+      <div class="row mt-20 align-items-center">
+        <div class="col-12 text-center">
+          <img src="assets/img/telegram.png" alt="CanYa - telegram" width="auto" height="100px">
+          <h4 class="text-white pt-25">Got another question? Ask our active community on Telegram.</h4>
+          <br>
+          <a href="https://t.me/CanYaCommunity" target="_blank" class="btn btn-lg btn-primary shadow-3">
+            Join us on Telegram</a>
+        </div>
       </div>
-    </section>
+
+    </div>
+  </section>
 
 </main>
 <!-- END Main container -->

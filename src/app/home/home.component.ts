@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { GasApiService } from '../gas-api.service';
 
 @Component({
   selector: 'app-home',
@@ -8,43 +9,39 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
-  // Current user?
-  currentUser: any = JSON.parse( localStorage.getItem('credentials') );
+  // currentUser: any = JSON.parse(localStorage.getItem('credentials'));
+  estimates: any[] = [];
+  gasInGwei: number;
 
-  // List
-  pitches = [
-    { username: 'Juan', title: 'Title', description: 'Short pitch', image: 'https://canyacoin.files.wordpress.com/2018/01/canya_featured-images-out-and-about.jpg', timestamp: '1520219384' },
-    { username: 'Juan', title: 'Title', description: 'Short pitch', image: 'https://canyacoin.files.wordpress.com/2018/01/canya_featured-images-out-and-about.jpg', timestamp: '1520219384' },
-    { username: 'Juan', title: 'Title', description: 'Short pitch', image: 'https://canyacoin.files.wordpress.com/2018/01/canya_featured-images-out-and-about.jpg', timestamp: '1520219384' },
-    { username: 'Juan', title: 'Title', description: 'Short pitch', image: 'https://canyacoin.files.wordpress.com/2018/01/canya_featured-images-out-and-about.jpg', timestamp: '1520219384' },
-    { username: 'Juan', title: 'Title', description: 'Short pitch', image: 'https://canyacoin.files.wordpress.com/2018/01/canya_featured-images-out-and-about.jpg', timestamp: '1520219384' },
-    { username: 'Juan', title: 'Title', description: 'Short pitch', image: 'https://canyacoin.files.wordpress.com/2018/01/canya_featured-images-out-and-about.jpg', timestamp: '1520219384' },
-    { username: 'Juan', title: 'Title', description: 'Short pitch', image: 'https://canyacoin.files.wordpress.com/2018/01/canya_featured-images-out-and-about.jpg', timestamp: '1520219384' },
-    { username: 'Juan', title: 'Title', description: 'Short pitch', image: 'https://canyacoin.files.wordpress.com/2018/01/canya_featured-images-out-and-about.jpg', timestamp: '1520219384' },
-    { username: 'Juan', title: 'Title', description: 'Short pitch', image: 'https://canyacoin.files.wordpress.com/2018/01/canya_featured-images-out-and-about.jpg', timestamp: '1520219384' },
-    { username: 'Juan', title: 'Title', description: 'Short pitch', image: 'https://canyacoin.files.wordpress.com/2018/01/canya_featured-images-out-and-about.jpg', timestamp: '1520219384' },
-    { username: 'Juan', title: 'Title', description: 'Short pitch', image: 'https://canyacoin.files.wordpress.com/2018/01/canya_featured-images-out-and-about.jpg', timestamp: '1520219384' },
-    { username: 'Juan', title: 'Title', description: 'Short pitch', image: 'https://canyacoin.files.wordpress.com/2018/01/canya_featured-images-out-and-about.jpg', timestamp: '1520219384' },
-    { username: 'Juan', title: 'Title', description: 'Short pitch', image: 'https://canyacoin.files.wordpress.com/2018/01/canya_featured-images-out-and-about.jpg', timestamp: '1520219384' }
-  ];
-
-  // Flags
-  loading = true;
-
-  constructor(private router: Router,
-    private activatedRoute:  ActivatedRoute) {
-
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private gasService: GasApiService) {
+    this.loadGasEstimates();
   }
 
   ngOnInit() {
-    setTimeout( () => {
-      this.loading = false;
-    }, 2000 );
+    const EVERY_30_SEC = 30 * 1000;
+    setInterval(() => this.loadGasEstimates(), EVERY_30_SEC);
   }
 
   ngAfterViewInit() {
-    this.activatedRoute.params.subscribe( (params) => {
-      // PARAM? = params['query'] ? params['query'] : '';
-    });
+    // this.activatedRoute.params.subscribe((params) => {
+    //   PARAM? = params['query'] ? params['query'] : '';
+    // });
+  }
+
+  setGasInGwei(val) {
+    console.log('gas change: ', val);
+    this.gasInGwei = val;
+  }
+
+  getGasInGwei(): number {
+    return this.gasInGwei;
+  }
+
+  async loadGasEstimates() {
+    this.estimates = await this.gasService.getGasEstimates();
+    console.log('estimates: ', this.estimates);
   }
 }

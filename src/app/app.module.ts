@@ -23,6 +23,8 @@ import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './pagenotfound/pagenotfound.component';
 import { GasInputComponent } from './gas-input/gas-input.component';
 import { GasCostsComponent } from './gas-costs/gas-costs.component';
+import { CommaSepNumPipe } from './comma-sep-num.pipe';
+import { GasApiService } from './gas-api.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { GasCostsComponent } from './gas-costs/gas-costs.component';
     HomeComponent,
     PageNotFoundComponent,
     GasInputComponent,
-    GasCostsComponent
+    GasCostsComponent,
+    CommaSepNumPipe
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,7 @@ import { GasCostsComponent } from './gas-costs/gas-costs.component';
     // AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     AngularFirestoreModule.enablePersistence(), // imports firebase/firestore, only needed for database features
   ],
-  providers: [AuthGuard, DatePipe],
+  providers: [AuthGuard, DatePipe, GasApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
