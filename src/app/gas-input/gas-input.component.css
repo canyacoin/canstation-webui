@@ -1,0 +1,30 @@
+.gas-text-input {
+  text-align: center;
+  font-size: 4em;  
+  border: 0;
+  line-height: initial;
+  font-weight: normal;
+  width: auto;
+  color: #6c757d;
+  outline: none;  
+}
+
+.gas-text-input:focus {
+  border: 0;
+}
+
+.gas-text-input::placeholder {
+  color: #6c757d63  ;
+}
+
+.gas-small-label {
+  font-size: 0.5em;
+  text-align: center;
+  /* position: absolute; */
+}
+
+div {
+  line-height: initial;
+  padding: 0;
+  margin: 0;
+}

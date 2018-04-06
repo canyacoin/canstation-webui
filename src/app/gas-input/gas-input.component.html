@@ -1,3 +1,7 @@
-<p>
-  gas-input works!
-</p>
+<div class="card">
+
+  <label class="gas-small-label">Gas</label>
+  <input class="gas-text-input" placeholder="21,000" [(ngModel)]='gasLimit' (keyup)="convertNumToCommaSep()" (keyup)="gasToGwei()" autofocus>
+  <label class="gas-small-label"> = {{ gasInGwei | commaSepNum }} Gwei</label>
+
+</div>
