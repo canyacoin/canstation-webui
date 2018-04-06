@@ -1,0 +1,31 @@
+.costs {
+  border-bottom: 1px solid #f3f3f3;
+}
+
+.eth-costs-label {
+  line-height: initial;
+  font-size: 3em;
+  font-weight: bold;
+}
+
+.widget-label {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.eth {
+  position: absolute;
+  top: -0.8em;
+}
+
+.fiat-costs-label {
+  display: block;
+  line-height: 0;
+  margin-bottom: 1.5em;  
+}
+
+.costs-per-gwei-label {
+  display: block;  
+  line-height: 0;
+  margin: 0;
+}
