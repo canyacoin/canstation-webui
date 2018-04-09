@@ -25,6 +25,9 @@ import { GasInputComponent } from './gas-input/gas-input.component';
 import { GasCostsComponent } from './gas-costs/gas-costs.component';
 import { CommaSepNumPipe } from './comma-sep-num.pipe';
 import { GasApiService } from './gas-api.service';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { GasCostsVsWaitTimeChartComponent } from './gas-costs-vs-wait-time-chart/gas-costs-vs-wait-time-chart.component';
+import { GasCostsEstimatesOverTimeChartComponent } from './gas-costs-estimates-over-time-chart/gas-costs-estimates-over-time-chart.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,9 @@ import { GasApiService } from './gas-api.service';
     PageNotFoundComponent,
     GasInputComponent,
     GasCostsComponent,
-    CommaSepNumPipe
+    CommaSepNumPipe,
+    GasCostsVsWaitTimeChartComponent,
+    GasCostsEstimatesOverTimeChartComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +54,7 @@ import { GasApiService } from './gas-api.service';
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     // AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     AngularFirestoreModule.enablePersistence(), // imports firebase/firestore, only needed for database features
+    ChartsModule
   ],
   providers: [AuthGuard, DatePipe, GasApiService],
   bootstrap: [AppComponent]
