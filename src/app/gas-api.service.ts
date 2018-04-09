@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
+import { promise } from 'selenium-webdriver';
+import { Promise } from 'q';
 
 @Injectable()
 export class GasApiService {
 
   constructor() { }
 
-  async getGasEstimates(): any[] {
+  async getGasEstimates() {
     let estimates = [];
     try {
       const res = await fetch('https://ethgasstation.info/json/ethgasAPI.json').then(response => response.json());
@@ -30,5 +32,11 @@ export class GasApiService {
     } catch (err) { console.log('Error, getGasEstimates: ', err); }
 
     return estimates;
+  }
+
+  async getPredictTable() {
+    return await fetch('https://ethgasstation.info/json/predictTable.json')
+      .then(response => response.json())
+      .catch(err => console.log('Error, getPredictTable: ', err));
   }
 }
