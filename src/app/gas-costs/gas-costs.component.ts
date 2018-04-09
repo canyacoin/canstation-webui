@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
-const ETH_PRICE_DOLLAR = 374;
-
 @Component({
   selector: 'app-gas-costs',
   templateUrl: './gas-costs.component.html',
@@ -12,6 +10,7 @@ export class GasCostsComponent implements OnInit, OnChanges {
   @Input() costPerGwei = 0;
   @Input() widgetLabel: string;
   @Input() currency = '$';
+  @Input() currencyConversions: any;
 
   costsInFiat: number;
   costsInEth: number;
@@ -20,6 +19,7 @@ export class GasCostsComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+
   }
 
   ngOnChanges() {
@@ -37,7 +37,7 @@ export class GasCostsComponent implements OnInit, OnChanges {
   }
 
   calcCostsInFiat(): number {
-    return this.costsInFiat = Number(parseFloat((this.getCostsInEth() * ETH_PRICE_DOLLAR) + '').toFixed(6));
+    return this.costsInFiat = Number(parseFloat((this.getCostsInEth() * this.currencyConversions.eth.usd) + '').toFixed(6));
   }
 
   formatCommaSepNum(val: number): string {

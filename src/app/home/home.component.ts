@@ -13,6 +13,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
   estimates: any[] = [];
   gasInGwei: number;
 
+  // TODO:: Load from external API
+  currencyConversions: any = {
+    eth: {
+      usd: 374
+    }
+  };
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,

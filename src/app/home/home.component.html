@@ -20,9 +20,22 @@
 
       <div class="row">
         <div class="col" *ngFor="let estimate of estimates">
-          <app-gas-costs [costPerGwei]="estimate.costPerGwei" [widgetLabel]="estimate.name" [gasInGwei]="getGasInGwei()"></app-gas-costs>
+          <app-gas-costs 
+            [costPerGwei]="estimate.costPerGwei" 
+            [widgetLabel]="estimate.name" 
+            [gasInGwei]="getGasInGwei()"
+            [currencyConversions]="currencyConversions"
+            ></app-gas-costs>
         </div>
       </div>
+
+      <div class="charts">
+          <app-gas-costs-vs-wait-time-chart></app-gas-costs-vs-wait-time-chart>
+      </div>      
+
+      <div class="charts">
+          <app-gas-costs-estimates-over-time-chart></app-gas-costs-estimates-over-time-chart>          
+      </div>      
 
       <div class="note text-center">
           <small>* Data provided by ethgasstation.info based on average 100 transactions from the last block mined by the network.</small>
