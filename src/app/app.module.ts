@@ -41,6 +41,7 @@ import { GasCostsEstimatesOverTimeChartComponent } from './gas-costs-estimates-o
     GasCostsComponent,
     CommaSepNumPipe,
     GasCostsVsWaitTimeChartComponent,
+    GasCostsVsWaitTimeChartComponent,
     GasCostsEstimatesOverTimeChartComponent
   ],
   imports: [
