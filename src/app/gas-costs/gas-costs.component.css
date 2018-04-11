@@ -21,11 +21,22 @@
 .fiat-costs-label {
   display: block;
   line-height: 0;
-  margin-bottom: 1.5em;  
+  margin-bottom: 1.5em;
 }
 
 .costs-per-gwei-label {
-  display: block;  
+  display: block;
   line-height: 0;
   margin: 0;
+}
+
+.card2 {
+  margin: 2em 0;
+  padding-bottom: 2em;
+}
+
+@media (max-width: 376px) {
+  .card2 {
+    border-bottom: 1px solid #f3f3f3;
+  }
 }

@@ -9,8 +9,8 @@ export class GasCostsComponent implements OnInit, OnChanges {
   @Input() gasInGwei = 0;
   @Input() costPerGwei = 0;
   @Input() widgetLabel: string;
-  @Input() currency = '$';
-  @Input() currencyConversions: any;
+  @Input() currency: any;
+  @Input() coinPrices: any;
 
   costsInFiat: number;
   costsInEth: number;
@@ -27,7 +27,6 @@ export class GasCostsComponent implements OnInit, OnChanges {
   }
 
   getCostsInEth(): number {
-    console.log(this.gasInGwei, this.costPerGwei);
     if (isNaN(this.gasInGwei) || isNaN(this.costPerGwei)) {
       return this.costsInEth = 0;
     }
@@ -37,7 +36,7 @@ export class GasCostsComponent implements OnInit, OnChanges {
   }
 
   calcCostsInFiat(): number {
-    return this.costsInFiat = Number(parseFloat((this.getCostsInEth() * this.currencyConversions.eth.usd) + '').toFixed(6));
+    return this.costsInFiat = Number(parseFloat((this.getCostsInEth() * this.coinPrices.ETH[this.currency.name]) + '').toFixed(6));
   }
 
   formatCommaSepNum(val: number): string {

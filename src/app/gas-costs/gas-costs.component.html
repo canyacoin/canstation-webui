@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card2">
 
   <div class="text-center">
     <div class="costs">
@@ -6,7 +6,7 @@
         <label class="eth">ETH#</label>
         <label class="eth-costs-label">{{ costsInEth | commaSepNum }}</label>
       </div>      
-      <label class="fiat-costs-label" *ngIf="costsInFiat > 0" >{{ currency }}{{ costsInFiat | commaSepNum }}</label>
+      <label class="fiat-costs-label" *ngIf="costsInFiat > 0" >{{ currency.symbol }}{{ costsInFiat | commaSepNum }}</label>
     </div>
 
     <label class="widget-label">{{ widgetLabel }}</label>
