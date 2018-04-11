@@ -30,16 +30,17 @@ export class GasCostsEstimatesOverTimeChartComponent implements OnInit {
   }
 
   async loadPriceToWaitTimeData() {
-    const estimates = await this.gasService.getGasEstimates();
+    const estimatesObj = await this.gasService.getGasEstimates();
+    const estimates = Object.values(estimatesObj);
 
     this.lineChartLabels = [].concat(this.lineChartLabels, [new Date().toLocaleTimeString()]);
 
     if (this.lineChartData.length === 0) {
-      return estimates.map(item => this.lineChartData.push({ data: [item.costPerGwei], label: item.name }));
+      return estimates.map(item => this.lineChartData.push({ data: [item.totalCostPerGwei], label: item.type }));
     }
 
     let index = 0;
-    estimates.map(item => this.lineChartData[index++].data.push(item.costPerGwei));
+    estimates.map(item => this.lineChartData[index++].data.push(item.totalCostPerGwei));
 
     this.sliceChartData(100);
   }
