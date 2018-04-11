@@ -1,5 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Store } from "@ngrx/store";
+import { State, Actions } from "../app.store";
 import { GasApiService } from '../gas-api.service';
 
 @Component({
@@ -21,15 +23,20 @@ export class HomeComponent implements OnInit, AfterViewInit {
   };
 
   constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private gasService: GasApiService) {
+    // private router: Router,
+    // private activatedRoute: ActivatedRoute,
+    private gasService: GasApiService,
+    private store: Store<State>) {
     this.loadGasEstimates();
   }
 
   ngOnInit() {
     const EVERY_30_SEC = 30 * 1000;
     setInterval(() => this.loadGasEstimates(), EVERY_30_SEC);
+
+    this.store.select('app').subscribe(appState => {
+      console.log('filters (currency): ', appState.filters.currency);
+    });
   }
 
   ngAfterViewInit() {

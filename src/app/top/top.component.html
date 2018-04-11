@@ -1,7 +1,7 @@
 <!-- Topbar -->
 <nav class="topbar topbar-expand-md topbar-sticky" id="section-top">
   <div class="container">
-    
+
     <div class="topbar-left">
       <button class="topbar-toggler text-gray">&#9776;</button>
       <a class="topbar-brand" [routerLink]="['/home']">
@@ -12,8 +12,12 @@
 
     <div class="topbar-right">
       <ul class="topbar-nav nav">
-        <li class="nav-item"><a class="nav-link" href="https://blog.canya.com.au/" target="_blank">Blog</a></li>
-        <li class="nav-item"><a class="nav-link" href="https://forum.canya.io" target="_blank">Forum</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://blog.canya.com.au/" target="_blank">Blog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://forum.canya.io" target="_blank">Forum</a>
+        </li>
         <!-- <li class="nav-item">
           <a class="nav-link" href="https://t.me/canyacoin" target="_blank">
             Telegram
@@ -27,7 +31,19 @@
         Telegram
         <i class="fa fa-telegram" aria-hidden="true"></i>
       </a>
-        
+
+      <span class="dropdown">
+        <button class="btn btn-sm btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">
+          {{ selectedCurrency.label }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#" (click)="setCurrency(currency.AUD)">{{currency.AUD.label}}</a>
+          <a class="dropdown-item" href="#" (click)="setCurrency(currency.USD)">{{currency.USD.label}}</a>
+          <a class="dropdown-item" href="#" (click)="setCurrency(currency.EUR)">{{currency.EUR.label}}</a>
+        </div>
+      </span>
+
     </div>
 
   </div>
