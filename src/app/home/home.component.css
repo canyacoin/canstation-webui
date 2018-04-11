@@ -146,5 +146,13 @@
 }
 
 .charts {  
-  margin-top: 5em;
+  margin-top: 2em;
+}
+
+.estimates {
+  margin: 2em 0 0 0;
+}
+
+.coin-prices {  
+  text-align: center;  
 }

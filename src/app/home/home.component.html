@@ -15,32 +15,36 @@
       <div class="">
         <app-gas-input (gasChange)="setGasInGwei($event)"></app-gas-input>
       </div>
-      
+
       <hr/>
 
-      <div class="row">
-        <div class="col" *ngFor="let estimate of estimates">
+      <div class="row estimates">
+        <div class="col" *ngFor="let estimateType of estimatesKeys">
           <app-gas-costs 
-            [costPerGwei]="estimate.costPerGwei" 
-            [widgetLabel]="estimate.name" 
+            [costPerGwei]="estimates[estimateType].avgCostPerGwei"
+            [widgetLabel]="estimates[estimateType].label"
             [gasInGwei]="getGasInGwei()"
-            [currencyConversions]="currencyConversions"
-            ></app-gas-costs>
+            [coinPrices]="coinPrices"
+            [currency]="currency"></app-gas-costs>
         </div>
       </div>
 
-      <div class="charts">
-          <app-gas-costs-vs-wait-time-chart></app-gas-costs-vs-wait-time-chart>
-      </div>      
-
-      <div class="charts">
-          <app-gas-costs-estimates-over-time-chart></app-gas-costs-estimates-over-time-chart>          
-      </div>      
-
-      <div class="note text-center">
-          <small>* Data provided by ethgasstation.info based on average 100 transactions from the last block mined by the network.</small>
+      <div class="coin-prices">
+          <app-coin-prices [coinPrices]="coinPrices" [currency]="currency"></app-coin-prices>
       </div>
       
+      <div class="charts">
+        <app-gas-costs-vs-wait-time-chart></app-gas-costs-vs-wait-time-chart>
+      </div>
+
+      <div class="charts">
+        <app-gas-costs-estimates-over-time-chart></app-gas-costs-estimates-over-time-chart>
+      </div>
+
+      <div class="note text-center">
+        <small>* Data provided by ethgasstation.info based on average 100 transactions from the last block mined by the network.</small>
+      </div>
+
     </div>
 
   </section>

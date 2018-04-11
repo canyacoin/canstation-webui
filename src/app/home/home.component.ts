@@ -1,48 +1,50 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { Store } from "@ngrx/store";
 import { State, Actions } from "../app.store";
 import { GasApiService } from '../gas-api.service';
+import { CoinPriceService } from '../coin-price.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit, OnChanges {
 
   // currentUser: any = JSON.parse(localStorage.getItem('credentials'));
-  estimates: any[] = [];
+  estimates = {};
+  estimatesKeys = [];
   gasInGwei: number;
-
-  // TODO:: Load from external API
-  currencyConversions: any = {
-    eth: {
-      usd: 374
+  currency: {
+    name: 'AUD',
+    symbol: 'A$'
+  };
+  coinPrices: any = {
+    ETH: {
+      AUD: 531.96
     }
   };
 
   constructor(
-    // private router: Router,
-    // private activatedRoute: ActivatedRoute,
     private gasService: GasApiService,
+    private coinPriceService: CoinPriceService,
     private store: Store<State>) {
-    this.loadGasEstimates();
   }
 
   ngOnInit() {
+    this.loadGasEstimates();
+    this.loadCoinPrices();
+    
     const EVERY_30_SEC = 30 * 1000;
     setInterval(() => this.loadGasEstimates(), EVERY_30_SEC);
 
     this.store.select('app').subscribe(appState => {
       console.log('filters (currency): ', appState.filters.currency);
+      this.currency = appState.filters.currency;
     });
   }
 
-  ngAfterViewInit() {
-    // this.activatedRoute.params.subscribe((params) => {
-    //   PARAM? = params['query'] ? params['query'] : '';
-    // });
+  ngOnChanges() {
   }
 
   setGasInGwei(val) {
@@ -56,6 +58,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   async loadGasEstimates() {
     this.estimates = await this.gasService.getGasEstimates();
-    console.log('estimates: ', this.estimates);
+    delete this.estimates['fastest']; // no need to display fastest, mostly equals to fast
+
+    this.estimatesKeys = Object.keys(this.estimates);    
+  }
+
+  async loadCoinPrices() {
+    this.coinPrices = await this.coinPriceService.getCoinPrice();
   }
 }
