@@ -8,6 +8,7 @@ body {
   line-height: 1.9;
   -webkit-transition: .5s;
   transition: .5s;
+  min-width: 315px;
 }
 
 ::-moz-selection {
@@ -5460,6 +5461,12 @@ ul.flexbox {
 }
 
 @media (max-width: 575px) {
+  .section {
+    padding-top: 1px;
+  }  
+  .topbar-brand img {
+    height: 25px;
+  }  
   .topbar-expand-xs.topbar-inverse .topbar-nav > .nav-item > .nav-link {
     color: #535353;
   }
@@ -5736,7 +5743,7 @@ ul.flexbox {
 
 @media (max-width: 991px) {
   .section {
-    padding-top: 50px;
+    padding-top: 25px;
     padding-bottom: 50px;
   }
 }
