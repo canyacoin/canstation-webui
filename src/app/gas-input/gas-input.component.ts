@@ -11,12 +11,19 @@ const GWEI = 1000000000;
 export class GasInputComponent implements OnInit {
   @Output() gasChange: EventEmitter<number> = new EventEmitter<number>();
 
-  gasLimit: string;
+  gasLimit: string = '21,000';
   gasInGwei: number;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {     
+    this.updateGasLimi();
+  }
+
+  updateGasLimi() {
+    this.convertNumToCommaSep();
+    this.gasToGwei();
+  }
 
   convertNumToCommaSep(): void {
     const gas = this.gasLimit ? Number(this.gasLimit.replace(/,/g, '')) : 0;
