@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit, OnChanges {
 
   async loadGasEstimates() {
     this.estimates = await this.gasService.getGasEstimates();
-    delete this.estimates['fastest']; // no need to display fastest, mostly equals to fast
+    delete this.estimates['Fastest']; // no need to display fastest, mostly equals to fast
 
     this.estimatesKeys = Object.keys(this.estimates);    
   }

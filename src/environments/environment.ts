@@ -12,5 +12,18 @@ export const environment = {
     projectId: 'caninvoice-9286f',
     storageBucket: 'caninvoice-9286f.appspot.com',
     messagingSenderId: '313965483789'
+  },
+  gasStation: {
+    waitToRefetchInSec: 60,
+    url: {
+      priceEstimate: 'http://localhost:5000/canyagasstation-a98a8/us-central1/api/gas-estimate/average', //'https://ethgasstation.info/json/ethgasAPI.json',
+      predictTable: 'https://ethgasstation.info/json/predictTable.json'
+    }
+  },
+  coinPrices: {
+    waitToRefetchInSec: 60,
+    url: {
+      coinPrice: 'https://min-api.cryptocompare.com/data/pricemulti?fsyms=CAN,ETH&tsyms=AUD,USD,EUR'
+    }
   }
 };

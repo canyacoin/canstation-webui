@@ -1,62 +1,55 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../environments/environment';
 
-const URL = {
-  priceEstimate: 'http://localhost:5000/canyagasstation-a98a8/us-central1/api/gas-estimate/average', //'https://ethgasstation.info/json/ethgasAPI.json',
-  predictTable: 'https://ethgasstation.info/json/predictTable.json'
-}
+const URL = environment.gasStation.url;
 
 @Injectable()
 export class GasApiService {
 
   constructor() { }
-//   {
-//     "fastest": {
-//         "totalCostPerGwei": 78,
-//         "totalWaitTimeInMin": 6,
-//         "numRecords": 12,
-//         "avgCostPerGwei": "6.500",
-//         "avgWaitTimeInMin": "0.500"
-//     },
-//     "fast": {
-//         "totalCostPerGwei": 78,
-//         "totalWaitTimeInMin": 6,
-//         "numRecords": 12,
-//         "avgCostPerGwei": "6.500",
-//         "avgWaitTimeInMin": "0.500"
-//     },
-//     "standard": {
-//         "totalCostPerGwei": 78,
-//         "totalWaitTimeInMin": 6,
-//         "numRecords": 12,
-//         "avgCostPerGwei": "6.500",
-//         "avgWaitTimeInMin": "0.500"
-//     },
-//     "safelow": {
-//         "totalCostPerGwei": 78,
-//         "totalWaitTimeInMin": 6,
-//         "numRecords": 12,
-//         "avgCostPerGwei": "6.500",
-//         "avgWaitTimeInMin": "0.500"
-//     }
-// }
+  /*
+  {
+    "Fastest": {
+      "totalCostPerGwei": 12,
+      "totalWaitTimeInMin": 1.5,
+      "numRecords": 3,
+      "avgCostPerGwei": "4.000",
+      "avgWaitTimeInMin": "0.500",
+      "label": "Fastest < 1m",
+      "type": "Fastest"
+    },
+    "Fast": {
+      "totalCostPerGwei": 3,
+      "totalWaitTimeInMin": 1.5,
+      "numRecords": 3,
+      "avgCostPerGwei": "1.000",
+      "avgWaitTimeInMin": "0.500",
+      "label": "Fast < 1m",
+      "type": "Fast"
+    },
+    "Standard": {
+      "totalCostPerGwei": 0.8999999999999999,
+      "totalWaitTimeInMin": 159,
+      "numRecords": 3,
+      "avgCostPerGwei": "0.300",
+      "avgWaitTimeInMin": "53.000",
+      "label": "Standard < 53m",
+      "type": "Standard"
+    },
+    "Safelow": {
+      "totalCostPerGwei": 0.6000000000000001,
+      "totalWaitTimeInMin": 383.4,
+      "numRecords": 3,
+      "avgCostPerGwei": "0.200",
+      "avgWaitTimeInMin": "127.800",
+      "label": "Safelow < 128m",
+      "type": "Safelow"
+    }
+  }
+  */
   async getGasEstimates(): Promise<any[]> {
     return await fetch(URL.priceEstimate)
       .then(response => response.json());
-      // .then(res => [{
-      //   name: `Fast (<${Math.ceil(res.avgWaitTimeInMin)}m)`,
-      //   costPerGwei: res.avgCostPerGwei,
-      //   waitTimeInMin: res.avgWaitTimeInMin
-      // },
-      // {
-      //   name: `Standard (<${Math.ceil(res.avgWait)}m)`,
-      //   costPerGwei: Number(res.average) / Number(res.average_calc),
-      //   waitTimeInMin: res.avgWait
-      // },
-      // {
-      //   name: `SafeLow (<${Math.ceil(res.safeLowWait)}m)`,
-      //   costPerGwei: Number(res.safeLow) / Number(res.safelow_calc),
-      //   waitTimeInMin: res.safeLowWait
-      // }]);
     // .catch(err => console.log('Error, getGasEstimates: ', err));
   }
 

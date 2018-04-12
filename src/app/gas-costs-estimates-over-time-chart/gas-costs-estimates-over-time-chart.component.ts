@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { GasApiService } from '../gas-api.service';
 
 @Component({
@@ -7,6 +7,8 @@ import { GasApiService } from '../gas-api.service';
   styleUrls: ['./gas-costs-estimates-over-time-chart.component.css']
 })
 export class GasCostsEstimatesOverTimeChartComponent implements OnInit {
+  @Input() estimates = [];
+
   index = 1;
   public lineChartData: Array<any> = [];
   public lineChartLabels: Array<any> = [];
@@ -16,23 +18,21 @@ export class GasCostsEstimatesOverTimeChartComponent implements OnInit {
     responsive: false,
     scales: {
       yAxes: [{ scaleLabel: { display: true, labelString: 'Gas Estimated Price (Gwei)' } }],
-      xAxes: [{ scaleLabel: { display: true, labelString: 'Time (Dynamic every 10 seconds)' } }],
+      xAxes: [{ scaleLabel: { display: true, labelString: 'Time (Dynamic every a few seconds)' } }],
     }
   };
+  
   public lineChartColors: Array<any> = [];
 
   constructor(private gasService: GasApiService) { }
 
-  ngOnInit() {
-    const EVERY_10_SEC = 1000 * 10;
-    this.loadPriceToWaitTimeData();
-    setInterval(() => this.loadPriceToWaitTimeData(), EVERY_10_SEC);
+  ngOnInit() { }
+
+  ngOnChanges() {
+    this.updatePriceToWaitTimeChartData(this.estimates);
   }
 
-  async loadPriceToWaitTimeData() {
-    const estimatesObj = await this.gasService.getGasEstimates();
-    const estimates = Object.values(estimatesObj);
-
+  updatePriceToWaitTimeChartData(estimates: any[]) {
     this.lineChartLabels = [].concat(this.lineChartLabels, [new Date().toLocaleTimeString()]);
 
     if (this.lineChartData.length === 0) {
@@ -42,11 +42,11 @@ export class GasCostsEstimatesOverTimeChartComponent implements OnInit {
     let index = 0;
     estimates.map(item => this.lineChartData[index++].data.push(item.totalCostPerGwei));
 
-    this.sliceChartData(100);
+    this.limitChartData(100);
   }
 
-  sliceChartData(sliceLimit) {
-    // keep the chart within 100 readings
+  // keep the chart within 100 readings
+  limitChartData(sliceLimit) {    
     if (this.lineChartLabels.length > sliceLimit) {
       this.lineChartLabels = this.lineChartLabels.slice(this.lineChartLabels.length - sliceLimit);
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GasApiService } from '../gas-api.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-gas-costs-vs-wait-time-chart',
@@ -23,9 +24,9 @@ export class GasCostsVsWaitTimeChartComponent implements OnInit {
   constructor(private gasService: GasApiService) { }
 
   ngOnInit() {
-    const EVERY_60_SEC = 1000 * 60;
+    const EVERY_X_SEC = Number(environment.gasStation.waitToRefetchInSec) * 1000;
     this.loadPriceToWaitTimeData();
-    setInterval(() => this.loadPriceToWaitTimeData(), EVERY_60_SEC);
+    setInterval(() => this.loadPriceToWaitTimeData(), EVERY_X_SEC);
   }
 
   async loadPriceToWaitTimeData() {

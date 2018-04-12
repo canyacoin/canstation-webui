@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../environments/environment';
 
-const URL = {
-  coinPrice: 'https://min-api.cryptocompare.com/data/pricemulti?fsyms=CAN,ETH&tsyms=AUD,USD,EUR'
-}
+const URL = environment.coinPrices.url;
 
 @Injectable()
 export class CoinPriceService {
