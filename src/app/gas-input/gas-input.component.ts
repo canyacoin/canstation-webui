@@ -14,19 +14,25 @@ export class GasInputComponent implements OnInit {
   gasLimit: string = '21,000';
   gasInGwei: number;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {     
+  ngOnInit() {
     this.updateGasLimi();
   }
 
   updateGasLimi() {
+    if (Number(this.gasLimit) < 0) {
+      this.gasLimit = Number(this.gasLimit) + '';
+    }
     this.convertNumToCommaSep();
     this.gasToGwei();
   }
 
   convertNumToCommaSep(): void {
-    const gas = this.gasLimit ? Number(this.gasLimit.replace(/,/g, '')) : 0;
+    let gas = this.gasLimit ? Number(this.gasLimit.replace(/,/g, '')) : 0;
+    if (!isNaN(gas) && gas < 0) {
+      gas = Math.abs(gas);
+    }
     this.gasLimit = !isNaN(gas) ? Number(gas).toLocaleString() : '';
   }
 
