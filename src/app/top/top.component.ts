@@ -30,17 +30,19 @@ export class TopComponent implements OnInit {
       value: 0
     }
   };
-  selectedCurrency = {};
+  selectedCurrency: any = {};
 
   currentUser: any = JSON.parse(localStorage.getItem('credentials'));
 
   constructor(private router: Router, private store: Store<State>) { }
 
   ngOnInit() {
-    this.setCurrency(this.currency.AUD);
+    const currencyName = localStorage.getItem('currencyName') || 'USD';
+    this.setCurrency(this.currency[currencyName]);
   }
 
   setCurrency(currency) {
+    localStorage.setItem('currencyName', currency.name);
     this.selectedCurrency = currency;
     this.store.dispatch({
       type: Actions.CHANGE_CURRENCY,

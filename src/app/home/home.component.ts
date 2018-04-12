@@ -16,12 +16,12 @@ export class HomeComponent implements OnInit, OnChanges {
   estimates = [];
   gasInGwei: number;
   currency: {
-    name: 'AUD',
-    symbol: 'A$'
+    name: 'USD',
+    symbol: '$'
   };
   coinPrices: any = {
     ETH: {
-      AUD: 531.96
+      USD: 430.9
     }
   };
 
