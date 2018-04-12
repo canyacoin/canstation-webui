@@ -19,10 +19,10 @@
       <hr/>
 
       <div class="row estimates">
-        <div class="col" *ngFor="let estimateType of estimatesKeys">
+        <div class="col" *ngFor="let estimate of estimates">
           <app-gas-costs 
-            [costPerGwei]="estimates[estimateType].avgCostPerGwei"
-            [widgetLabel]="estimates[estimateType].label"
+            [costPerGwei]="estimate.avgCostPerGwei"
+            [widgetLabel]="estimate.label"
             [gasInGwei]="getGasInGwei()"
             [coinPrices]="coinPrices"
             [currency]="currency"></app-gas-costs>
@@ -38,7 +38,7 @@
       </div>
 
       <div class="charts">
-        <app-gas-costs-estimates-over-time-chart></app-gas-costs-estimates-over-time-chart>
+        <app-gas-costs-estimates-over-time-chart [estimates]="estimates"></app-gas-costs-estimates-over-time-chart>
       </div>
 
       <div class="note text-center">

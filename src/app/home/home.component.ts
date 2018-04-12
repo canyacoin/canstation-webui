@@ -3,6 +3,7 @@ import { Store } from "@ngrx/store";
 import { State, Actions } from "../app.store";
 import { GasApiService } from '../gas-api.service';
 import { CoinPriceService } from '../coin-price.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -12,8 +13,7 @@ import { CoinPriceService } from '../coin-price.service';
 export class HomeComponent implements OnInit, OnChanges {
 
   // currentUser: any = JSON.parse(localStorage.getItem('credentials'));
-  estimates = {};
-  estimatesKeys = [];
+  estimates = [];
   gasInGwei: number;
   currency: {
     name: 'AUD',
@@ -34,21 +34,16 @@ export class HomeComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.loadGasEstimates();
     this.loadCoinPrices();
-    
-    const EVERY_30_SEC = 30 * 1000;
-    setInterval(() => this.loadGasEstimates(), EVERY_30_SEC);
 
-    this.store.select('app').subscribe(appState => {
-      console.log('filters (currency): ', appState.filters.currency);
-      this.currency = appState.filters.currency;
-    });
+    const EVERY_X_SEC = Number(environment.gasStation.waitToRefetchInSec) * 1000;
+    setInterval(() => this.loadGasEstimates(), EVERY_X_SEC);
+
+    this.store.select('app').subscribe(appState => this.currency = appState.filters.currency);
   }
 
-  ngOnChanges() {
-  }
+  ngOnChanges() { }
 
   setGasInGwei(val) {
-    console.log('gas change: ', val);
     this.gasInGwei = val;
   }
 
@@ -57,10 +52,10 @@ export class HomeComponent implements OnInit, OnChanges {
   }
 
   async loadGasEstimates() {
-    this.estimates = await this.gasService.getGasEstimates();
-    delete this.estimates['Fastest']; // no need to display fastest, mostly equals to fast
+    const estimateObj = await this.gasService.getGasEstimates();
+    delete estimateObj['Fastest']; // no need to display fastest, mostly equals to fast
 
-    this.estimatesKeys = Object.keys(this.estimates);    
+    this.estimates = Object.values(estimateObj);
   }
 
   async loadCoinPrices() {
