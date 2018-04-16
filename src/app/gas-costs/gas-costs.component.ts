@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
+const GWEI_UNIT = 1000000000;
+
 @Component({
   selector: 'app-gas-costs',
   templateUrl: './gas-costs.component.html',
@@ -13,7 +15,7 @@ export class GasCostsComponent implements OnInit, OnChanges {
   @Input() coinPrices: any;
 
   costsInFiat: number;
-  costsInEth: number;
+  costsInGWei: number;
 
   constructor() {
   }
@@ -23,20 +25,20 @@ export class GasCostsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    this.calcCostsInFiat();
+    this.calcCostsInFiat();    
   }
 
-  getCostsInEth(): number {
+  getCostsInGWei(): number {
     if (isNaN(this.gasInGwei) || isNaN(this.costPerGwei)) {
-      return this.costsInEth = 0;
+      return this.costsInGWei = 0;
     }
 
-    this.costsInEth = this.gasInGwei * this.costPerGwei;
-    return !isNaN(this.costsInEth) ? Number(parseFloat(this.costsInEth + '').toFixed(6)) : 0;
+    this.costsInGWei = this.gasInGwei * this.costPerGwei;
+    return !isNaN(this.costsInGWei) ? Number(parseFloat(this.costsInGWei + '').toFixed(6)) : 0;
   }
 
   calcCostsInFiat(): number {
-    return this.costsInFiat = Number(parseFloat((this.getCostsInEth() * this.coinPrices.ETH[this.currency.name]) + '').toFixed(6));
+    return this.costsInFiat = Number(parseFloat((this.getCostsInGWei() * this.coinPrices.ETH[this.currency.name]) + '').toFixed(6));
   }
 
   formatCommaSepNum(val: number): string {
