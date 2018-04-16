@@ -17,10 +17,11 @@ export class GasInputComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.updateGasLimi();
+    this.updateGasLimi('21,000');
   }
 
-  updateGasLimi() {
+  updateGasLimi(gasLimit = '0') {
+    this.gasLimit = Number(gasLimit.replace(/,/g, '')) > 0 ? gasLimit : this.gasLimit ;
     if (Number(this.gasLimit) < 0) {
       this.gasLimit = Number(this.gasLimit) + '';
     }

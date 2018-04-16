@@ -1,11 +1,16 @@
-<div class="card">
+<div class="card">  
 
-  <label class="gas-small-label">Enter Gas:</label>
+  <div class="text-center">
+      <a class="gas-small-label" href="#" (click)="updateGasLimi('21,000')">21k (Ether)</a> | 
+      <a class="gas-small-label" href="#" (click)="updateGasLimi('100,000')">100k (Tokens)</a> | 
+        <a class="gas-small-label" href="#" (click)="updateGasLimi('200,000')">200k (Contracts)</a>
+  </div>
+  
   <input class="gas-text-input" 
     placeholder="21,000" 
     [(ngModel)]='gasLimit' 
     (keyup)="updateGasLimi()" 
     autofocus>
-  <label class="gas-small-label"> = {{ gasInGwei | commaSepNum }} Gwei</label>
+  <!-- <label class="gas-small-label"> = {{ gasInGwei | commaSepNum }} Gwei</label> -->
 
 </div>
