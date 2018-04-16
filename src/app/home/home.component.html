@@ -12,34 +12,35 @@
   <section class="section" id="section-main">
 
     <div class="container">
-      <div class="">
+
+      <div class="text-center">
+        <div class="title">Gas Limit</div>
         <app-gas-input (gasChange)="setGasInGwei($event)"></app-gas-input>
       </div>
 
       <hr/>
 
-      <div class="row estimates">
-        <div class="col" *ngFor="let estimate of estimates">
-          <app-gas-costs 
-            [costPerGwei]="estimate.avgCostPerGwei"
-            [widgetLabel]="estimate.label"
-            [gasInGwei]="getGasInGwei()"
-            [coinPrices]="coinPrices"
-            [currency]="currency"></app-gas-costs>
+      <div class="estimates text-center">
+        <div class="title gas-price-title">Gas Price</div>
+        <div class="row">
+          <div class="col" *ngFor="let estimate of estimates">
+            <app-gas-costs [costPerGwei]="estimate.avgCostPerGwei" [widgetLabel]="estimate.label" [gasInGwei]="getGasInGwei()" [coinPrices]="coinPrices"
+              [currency]="currency"></app-gas-costs>
+          </div>
         </div>
       </div>
 
       <div class="coin-prices">
-          <app-coin-prices [coinPrices]="coinPrices" [currency]="currency"></app-coin-prices>
+        <app-coin-prices [coinPrices]="coinPrices" [currency]="currency"></app-coin-prices>
       </div>
-      
+
       <div class="charts">
         <app-gas-costs-vs-wait-time-chart></app-gas-costs-vs-wait-time-chart>
       </div>
 
-      <div class="charts">
+      <!-- <div class="charts">
         <app-gas-costs-estimates-over-time-chart [estimates]="estimates"></app-gas-costs-estimates-over-time-chart>
-      </div>
+      </div> -->
 
       <div class="note text-center">
         <small>* Data provided by ethgasstation.info based on average 100 transactions from the last block mined by the network.</small>

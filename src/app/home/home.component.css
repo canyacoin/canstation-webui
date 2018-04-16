@@ -156,3 +156,17 @@
 .coin-prices {  
   text-align: center;  
 }
+
+.title {
+  font-size: 1.75rem;
+  font-weight: lighter;
+  margin-bottom: 1em;  
+  border-bottom: 1px solid #e9ecef;
+  width: 200px;
+  margin: 0.5em auto;  
+}
+
+.gas-price-title {
+  margin-bottom: 1em;
+}
+
