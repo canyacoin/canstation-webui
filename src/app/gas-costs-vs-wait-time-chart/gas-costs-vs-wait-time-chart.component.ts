@@ -14,7 +14,7 @@ export class GasCostsVsWaitTimeChartComponent implements OnInit {
   public lineChartLegend = true;
   public lineChartType = 'line';
   public lineChartOptions: any = {
-    responsive: false,
+    responsive: true,
     scales: {
       yAxes: [{ scaleLabel: { display: true, labelString: 'Expected Wait Time (minutes)' } }],
       xAxes: [{ scaleLabel: { display: true, labelString: 'Gas Price (Gwei)' } }],
@@ -35,10 +35,12 @@ export class GasCostsVsWaitTimeChartComponent implements OnInit {
     const data = [];
 
     pTable.map(item => {
+      let time = item.expectedTime > 100 ? 100 : item.expectedTime;
+
       // Ignore records with same waitTime.
       // Ex: all gasPrice > 1 Gwei will produce a waitTime of 0.48 so no need to display them to make the chart clear.
-      if (data.indexOf(item.expectedTime) === -1) {
-        data.push(item.expectedTime);
+      if (data.indexOf(time) === -1) {
+        data.push(time);
         label.push(item.gasprice);
       }
     });
