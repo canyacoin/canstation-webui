@@ -3,8 +3,8 @@
   <div class="text-center">
     <div class="costs">
       <div>
-        <label class="eth">GWei#</label>
-        <label class="eth-costs-label">{{ costsInGWei | commaSepNum }}</label>
+        <label class="eth">GWei:</label>
+        <label class="eth-costs-label">{{ formattedCostPerGwei | commaSepNum }}</label>
       </div>      
       <label class="fiat-costs-label" *ngIf="costsInFiat > 0" >
         {{ currency.symbol }}{{ costsInFiat | commaSepNum }}
@@ -12,7 +12,7 @@
     </div>
 
     <label class="widget-label">{{ widgetLabel }}</label>
-    <label class="costs-per-gwei-label">costs {{ costPerGwei | commaSepNum }} ETH per Gwei</label>    
+    <!-- <label class="costs-per-gwei-label">costs {{ costsInGWei | commaSepNum }} in Gwei</label> -->
   </div>
 
 </div>

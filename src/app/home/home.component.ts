@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
-import { Store } from "@ngrx/store";
-import { State, Actions } from "../app.store";
+import { Store } from '@ngrx/store';
+import { State, Actions } from '../app.store';
 import { GasApiService } from '../gas-api.service';
 import { CoinPriceService } from '../coin-price.service';
 import { environment } from '../../environments/environment';
@@ -55,7 +55,11 @@ export class HomeComponent implements OnInit, OnChanges {
     const estimateObj = await this.gasService.getGasEstimates();
     delete estimateObj['Fastest']; // no need to display fastest, mostly equals to fast
 
-    this.estimates = Object.values(estimateObj);
+    this.estimates = Object.values(estimateObj).map(est => {
+      const minute = est.avgCostPerGwei > 1 ? ' Minute' : ' Minutes';
+      est.label = est.label.replace('m', minute);
+      return est;
+    });
   }
 
   async loadCoinPrices() {

@@ -16,6 +16,7 @@ export class GasCostsComponent implements OnInit, OnChanges {
 
   costsInFiat: number;
   costsInGWei: number;
+  formattedCostPerGwei: number;
 
   constructor() {
   }
@@ -25,7 +26,7 @@ export class GasCostsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    this.calcCostsInFiat();    
+    this.calcCostsInFiat();
   }
 
   getCostsInGWei(): number {
@@ -34,6 +35,7 @@ export class GasCostsComponent implements OnInit, OnChanges {
     }
 
     this.costsInGWei = this.gasInGwei * this.costPerGwei;
+    this.formattedCostPerGwei = Number(parseFloat(this.costPerGwei + '').toFixed(2)); // Math.ceil(this.costPerGwei);
     return !isNaN(this.costsInGWei) ? Number(parseFloat(this.costsInGWei + '').toFixed(6)) : 0;
   }
 
