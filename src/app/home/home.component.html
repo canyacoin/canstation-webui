@@ -13,25 +13,65 @@
 
     <div class="container">
 
-      <div class="text-center">
-        <div class="title">Gas Limit</div>
-        <app-gas-input (gasChange)="setGasInGwei($event)"></app-gas-input>
-      </div>
-
-      <hr/>
-
-      <div class="estimates text-center">
-        <div class="title gas-price-title">Gas Price</div>
-        <div class="row">
-          <div class="col col-12 col-sm-4" *ngFor="let estimate of estimates">
-            <app-gas-costs [costPerGwei]="estimate.avgCostPerGwei" [widgetLabel]="estimate.label" [gasInGwei]="getGasInGwei()" [coinPrices]="coinPrices"
-              [currency]="currency"></app-gas-costs>
-          </div>
+      <div class="flash-message-container clearfix" *ngIf="displayFlashMessage">
+        <i class="fa fa-times close-icon float-right" (click)="hideFlashMessage()"></i>
+        <div class="flash-message-text float-left">
+          Don't pay too much Gas! CanStation helps you save ether by recommending gas prices according to your needs.
         </div>
       </div>
 
-      <div class="coin-prices">
+      <div class="text-center">
+        <div class="title">Gas Limit
+          <i class="fa fa-question-circle help-icon" 
+            title="Maximum gas amount to run a transaction" 
+            (click)="openHelpDlg()"></i>
+        </div>
+        <app-gas-input (gasChange)="setGasInGwei($event)"></app-gas-input>
+      </div>
+
+      <div class="estimates text-center">
+        <div class="title">Gas Price
+          <i class="fa fa-question-circle help-icon" 
+            title="The recommended Gas Price is measured in Gwei, a unit of measurement for ether. Gas Price determines how quickly your transaction is processed on the ethereum network. This is because miners prioritise transactions by highest gas price, enabling you to save gas if your transaction isn't time sensitive."
+            (click)="openHelpDlg()"></i>
+        </div>
+        <div class="row no-gutters">
+          <div class="col col-12 col-sm-4" *ngIf="estimates.Safelow">
+            <app-gas-costs 
+              [costPerGwei]="estimates.Safelow.avgCostPerGwei" 
+              [widgetLabel]="estimates.Safelow.label" 
+              [gasInGwei]="getGasInGwei()" 
+              [coinPrices]="coinPrices"
+              [currency]="currency"></app-gas-costs>
+          </div>
+
+          <div class="col col-12 col-sm-4" *ngIf="estimates.Standard">
+            <app-gas-costs 
+              [costPerGwei]="estimates.Standard.avgCostPerGwei" 
+              [widgetLabel]="estimates.Standard.label" 
+              [gasInGwei]="getGasInGwei()" 
+              [coinPrices]="coinPrices"
+              [currency]="currency"></app-gas-costs>
+          </div>
+
+          <div class="col col-12 col-sm-4" *ngIf="estimates.Fast">
+            <app-gas-costs 
+              [costPerGwei]="estimates.Fast.avgCostPerGwei" 
+              [widgetLabel]="estimates.Fast.label" 
+              [gasInGwei]="getGasInGwei()" 
+              [coinPrices]="coinPrices"
+              [currency]="currency"></app-gas-costs>
+          </div>
+    
+        </div>
+      </div>
+
+      <!-- <div class="coin-prices">
         <app-coin-prices [coinPrices]="coinPrices" [currency]="currency"></app-coin-prices>
+      </div> -->
+
+      <div class="text-center">
+        <label class="discimilar">* Data provided by ethgasstation.info based on average 100 transactions from the lastest blocks mined by the network.</label>
       </div>
 
       <div class="charts">
@@ -42,12 +82,15 @@
         <app-gas-costs-estimates-over-time-chart [estimates]="estimates"></app-gas-costs-estimates-over-time-chart>
       </div> -->
 
-      <div class="note text-center">
-        <small>* Data provided by ethgasstation.info based on average 100 transactions from the last block mined by the network.</small>
-      </div>
-
     </div>
 
+    <div class="bancor-wc">
+      <div id="bancor-wc"></div>
+    </div>
+
+    <div class="mt-50">
+      <app-cards></app-cards>
+    </div>
   </section>
 
   <!--

@@ -1,16 +1,15 @@
-<div class="card">  
+<div class="card form-container">
 
   <div class="text-center">
-      <a class="gas-small-label" href="#" (click)="updateGasLimi('21,000')">21k (Ether)</a> | 
-      <a class="gas-small-label" href="#" (click)="updateGasLimi('100,000')">100k (Tokens)</a> | 
-        <a class="gas-small-label" href="#" (click)="updateGasLimi('200,000')">200k (Contracts)</a>
+
+    <label>Please select a transaction type</label>
+
+    <button class="btn" [ngClass]="{ 'btn-outline-primary': trx.type !== trxTypes.ether.type, 'btn-primary': trx.type === trxTypes.ether.type }" (click)="updateGasLimi(trxTypes.ether.type, '21,000')">Sending Ether</button>
+    <button class="btn" [ngClass]="{ 'btn-outline-primary': trx.type !== trxTypes.token.type, 'btn-primary': trx.type === trxTypes.token.type }" (click)="updateGasLimi(trxTypes.token.type, '100,000')">Sending Tokens</button>
+    <button class="btn" [ngClass]="{ 'btn-outline-primary': trx.type !== trxTypes.contract.type, 'btn-primary': trx.type === trxTypes.contract.type }"  (click)="updateGasLimi(trxTypes.contract.type, '200,000')">Contracts</button>
   </div>
-  
-  <input class="gas-text-input" 
-    placeholder="21,000" 
-    [(ngModel)]='gasLimit' 
-    (keyup)="updateGasLimi()" 
-    autofocus>
-  <!-- <label class="gas-small-label"> = {{ gasInGwei | commaSepNum }} Gwei</label> -->
+
+  <input class="gas-text-input" placeholder="21,000" [(ngModel)]='gasLimit' (keyup)="updateGasLimi(trx.type)">
+  <label> * {{ trx.cost | commaSepNum }} is the recommended gas limit for <span class="">{{ trx.type }}</span> transactions</label>
 
 </div>

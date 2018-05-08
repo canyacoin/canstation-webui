@@ -5,8 +5,8 @@
 }
 
 .coin-prices-container {
-  border-top: 1px solid #53535312;
-  border-bottom: 1px solid #53535312;
+  /* border-top: 1px solid #53535312; */
+  /* border-bottom: 1px solid #53535312; */
   padding: 2em 0;
   display: inline-block;
 }

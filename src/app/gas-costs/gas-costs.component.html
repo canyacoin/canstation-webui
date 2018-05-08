@@ -1,18 +1,41 @@
-<div class="card2">
+<div class="card">
 
-  <div class="text-center">
+  <div class="card-title" [ngClass]="{ 'bg-green': widgetLabel === 'Standard ' }">
+    <span class="text-uppercase">{{ widgetLabel }}</span>
+    <div class="sub-title" *ngIf="widgetLabel === 'Standard '">(Recommended)</div>
+  </div>
+
+  <div class="card-body">
+    <div>
+      <label class="speed">SPEED</label>
+      {{ speed }}
+    </div>
+
+    <div>
+      <label class="speed">GWei</label>
+      <span class="gwei-price">{{ formattedCostPerGwei | commaSepNum }}</span>
+    </div>
+
+    <div>
+      <label class="speed">TRANSACTION FEE</label>
+      {{ currency.symbol }}{{ costsInFiat | commaSepNum }}
+    </div>
+
+  </div>
+
+  <!-- <div class="text-center">
     <div class="costs">
       <div>
         <label class="eth">GWei:</label>
         <label class="eth-costs-label">{{ formattedCostPerGwei | commaSepNum }}</label>
-      </div>      
-      <label class="fiat-costs-label" *ngIf="costsInFiat > 0" >
+      </div>
+      <label class="fiat-costs-label" *ngIf="costsInFiat > 0">
         {{ currency.symbol }}{{ costsInFiat | commaSepNum }}
       </label>
     </div>
 
     <label class="widget-label">{{ widgetLabel }}</label>
-    <!-- <label class="costs-per-gwei-label">costs {{ costsInGWei | commaSepNum }} in Gwei</label> -->
-  </div>
+    <label class="costs-per-gwei-label">costs {{ costsInGWei | commaSepNum }} in Gwei</label>
+  </div> -->
 
 </div>

@@ -31,10 +31,54 @@
   margin: 0;
 }
 
-.card2 {
-  /* margin: 2em 0; */
+.card {
   padding-bottom: 2em;
   margin-bottom: 3em;
+  border-radius: 5px;
+  border: solid 1px #eceeef;
+  margin: 5px;
+}
+
+.card-title {  
+  padding: 1em;
+  background-color: #eceeef;  
+  margin: 0;
+}
+
+.card-body {  
+  background-color: #ffffff;  
+  padding: 1em;
+  margin: 0;
+}
+
+.speed {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  color: #b7bbbd;    
+  margin-top: 1em;
+  margin-bottom: 0;
+}
+
+.gwei-price {
+  font-size: 24px;
+  text-align: center;
+  color: #535353;
+}
+
+.bg-green {
+  background-color: #d4eddb;
+  padding: 0.5em;
+}
+
+.sub-title {
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+  text-align: center;
+  color: #535353;  
+  font-weight: lighter;
 }
 
 @media (max-width: 376px) {

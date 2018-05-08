@@ -1,0 +1,31 @@
+.card{ 
+  box-shadow: 0 0px 10px 0 rgba(0,0,0,0.1);
+  transition: 0.3s;
+  width: 350px;
+  height: 380px; 
+  display: inline-block;
+  margin: 15px;
+  border-radius: 15px;
+  padding: 2.5px;
+}
+.card-div{ 
+  text-align: center;
+  align-content: center;
+  justify-content: center;
+}
+.card-illustration{
+  width:auto; 
+  height: 150px;
+  margin: 15px;
+}
+.card-logo{ 
+  width: auto;
+  height: 35px;
+}
+.card img{
+  padding-bottom:15px;
+}
+.card p{
+  padding-left:10px; 
+  padding-right:10px;
+}  

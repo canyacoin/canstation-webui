@@ -1,3 +1,8 @@
 .chart-canvas {
   margin: 0 auto;  
+  padding: 2em;
+}
+
+.form-container {
+  background-color: white;  
 }

@@ -13,6 +13,7 @@ export class GasCostsComponent implements OnInit, OnChanges {
   @Input() widgetLabel: string;
   @Input() currency: any;
   @Input() coinPrices: any;
+  speed = '1';
 
   costsInFiat: number;
   costsInGWei: number;
@@ -27,6 +28,7 @@ export class GasCostsComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     this.calcCostsInFiat();
+    this.formatWidgetLabel();
   }
 
   getCostsInGWei(): number {
@@ -40,10 +42,18 @@ export class GasCostsComponent implements OnInit, OnChanges {
   }
 
   calcCostsInFiat(): number {
-    return this.costsInFiat = Number(parseFloat((this.getCostsInGWei() * this.coinPrices.ETH[this.currency.name]) + '').toFixed(6));
+    const costs = Number(parseFloat((this.getCostsInGWei() * this.coinPrices.ETH[this.currency.name]) + '').toFixed(6));
+    return this.costsInFiat = Math.round(costs * 100) / 100; // round to only 2 decimal places
   }
 
   formatCommaSepNum(val: number): string {
     return val ? val.toLocaleString('en-EN', { maximumFractionDigits: 6 }) : '0';
+  }
+
+  formatWidgetLabel() {
+    const label = this.widgetLabel;
+    const index = label.indexOf('<');
+    this.speed = index > -1 ? label.substr(index) : this.speed;
+    this.widgetLabel = index > -1 ? label.substr(0, label.indexOf('<')) : label;
   }
 }

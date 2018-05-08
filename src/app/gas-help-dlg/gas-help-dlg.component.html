@@ -1,0 +1,55 @@
+<div class="form-container">
+
+  <div class="text-center clearfix">
+    <i class="fa fa-times close-icon mt-5 fa-lg float-right" (click)="close()"></i>
+
+    <h2 class="pt-10">What is Gas?</h2>
+    <p class="subtitle">Behind the scenes</p>
+  </div>
+
+  <div class="text-center">
+    <img class="img-fluid" src="assets/img/what-is-gas.svg" />
+  </div>
+
+  <div class="p-25">
+    <p>
+      When someone talks about “gas” they are usually referring to either
+    </p>
+
+    <ul>
+      <li>Gas limit</li>
+      <li>Gas price</li>
+    </ul>
+
+    <p>
+      <strong>Gas limit</strong> is the maximum amount of gas you are willing to spend on a transaction. Generally, the recommended
+      gas limit you should set in your transaction are:
+    </p>
+
+    <ul>
+      <li>21,000 for standard transactions.</li>
+      <li>100,000 for sending tokens (ERC20 Tokens)</li>
+      <li>500,000 for executing contracts.</li>
+    </ul>
+
+    <p>
+      <strong>Gas price</strong> is usually measured in GWei, and you can set this price to determine how much you are willing to
+      spend per unit of gas. CanStation allows you to choose the GWei to help you in turn estimate the speed that your transaction
+      will be mined, taking into account of the current network conditions.
+    </p>
+
+    <p>
+      <strong>Transaction Fees</strong> (Tx Fees) are calculated by
+      <span class="light-strong">Gas Limit * Gas Price</span>
+    </p>
+
+    <p>
+      Be smart about the numbers you enter for “Gas Limit” and “Gwei” when you send or sign your transaction!
+    </p>
+
+    <p>
+      Check out MEW’s detailed explanation
+      <a target="_blank" href="https://myetherwallet.github.io/knowledge-base/gas/what-is-gas-ethereum.html">here</a> to learn more about gas.
+    </p>
+  </div>
+</div>

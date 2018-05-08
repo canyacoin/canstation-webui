@@ -8,6 +8,7 @@ import { DatePipe } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './auth.guard';
+import { ModalDialogModule } from 'ngx-modal-dialog';
 
 // import { AngularFireModule } from 'angularfire2';
 // import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -33,6 +34,8 @@ import { GasCostsEstimatesOverTimeChartComponent } from './gas-costs-estimates-o
 import { appReducer, initialState } from './app.store';
 import { StoreModule, ActionReducer, combineReducers } from '@ngrx/store';
 import { CoinPricesComponent } from './coin-prices/coin-prices.component';
+import { GasHelpDlgComponent } from './gas-help-dlg/gas-help-dlg.component';
+import { CardsComponent } from './cards/cards.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,9 @@ import { CoinPricesComponent } from './coin-prices/coin-prices.component';
     GasCostsVsWaitTimeChartComponent,
     GasCostsVsWaitTimeChartComponent,
     GasCostsEstimatesOverTimeChartComponent,
-    CoinPricesComponent
+    CoinPricesComponent,
+    GasHelpDlgComponent,
+    CardsComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +68,9 @@ import { CoinPricesComponent } from './coin-prices/coin-prices.component';
     // AngularFirestoreModule.enablePersistence(), // imports firebase/firestore, only needed for database features
     ChartsModule,
     StoreModule.forRoot(<any>{ app: appReducer }, { initialState }),
+    ModalDialogModule.forRoot()
   ],
+  entryComponents: [GasHelpDlgComponent],
   providers: [AuthGuard, DatePipe, GasApiService, CoinPriceService],
   bootstrap: [AppComponent]
 })

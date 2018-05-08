@@ -145,10 +145,6 @@
   margin-top: 50px;
 }
 
-.charts {  
-  margin-top: 2em;
-}
-
 .estimates {
   margin: 2em 0 0 0;
 }
@@ -157,16 +153,51 @@
   text-align: center;  
 }
 
-.title {
-  font-size: 1.75rem;
-  font-weight: lighter;
-  margin-bottom: 1em;  
-  border-bottom: 1px solid #e9ecef;
-  width: 200px;
-  margin: 0.5em auto;  
+.title {  
+  height: 29px;  
+  font-size: 18px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #535353;
 }
 
 .gas-price-title {
   margin-bottom: 1em;
 }
 
+.section {
+  background-color: #f8f9fa;
+}
+
+.discimilar {
+    font-size: 10px;    
+    color: #b7bbbd;  
+    margin: 1em 0;
+}
+
+.flash-message-container {
+  padding: 1em;  
+  border-radius: 5px;
+  background-color: #f0fbff;
+  margin-bottom: 1em; 
+}
+
+.flash-message-text {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-align: left;
+  color: #33ccff;  
+  width: 98%;
+}
+
+.bancor-wc {
+  margin-top: 2em;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border: solid 1px #eceeef;
+}
