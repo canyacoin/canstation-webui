@@ -9,6 +9,7 @@ import { GasHelpDlgComponent } from '../gas-help-dlg/gas-help-dlg.component';
 import { Subject } from 'rxjs/Subject';
 
 declare var BancorConvertWidget: any;
+declare var createCards: any; // = window['createCards'];
 
 @Component({
   selector: 'app-home',
@@ -42,6 +43,7 @@ export class HomeComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    createCards('CanStation');
     BancorConvertWidget.init({
       'type': '1',
       'baseCurrencyId': '5a6f61ece3de16000123763a',
@@ -52,6 +54,7 @@ export class HomeComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngOnInit() {
+
     this.loadGasEstimates();
     this.loadCoinPrices();
 
